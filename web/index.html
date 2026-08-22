@@ -83,12 +83,40 @@
 
     .brand-block { display: flex; align-items: center; gap: 1.1rem; }
 
-    .sun-mark { flex: none; }
+    .sun-mark-wrap {
+      position: relative;
+      flex: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .sun-mark-wrap::before {
+      content: '';
+      position: absolute;
+      inset: -14px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(246, 201, 14, 0.55) 0%, rgba(246, 201, 14, 0) 70%);
+      animation: sun-breathe 3.2s ease-in-out infinite;
+    }
+
+    .sun-mark { flex: none; position: relative; z-index: 1; }
+    .sun-mark circle { animation: sun-glow 3.2s ease-in-out infinite; transform-origin: center; }
+
+    @keyframes sun-breathe {
+      0%, 100% { transform: scale(0.85); opacity: 0.6; }
+      50% { transform: scale(1.15); opacity: 1; }
+    }
+
+    @keyframes sun-glow {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.08); }
+    }
 
     .brand-copy h1 {
       font-family: 'Syne', sans-serif;
       font-weight: 800;
-      font-size: clamp(1.6rem, 3vw, 2.35rem);
+      font-size: clamp(1.7rem, 3.4vw, 2.6rem);
       color: var(--sand);
       line-height: 1.05;
       letter-spacing: -0.01em;
@@ -259,6 +287,33 @@
       animation: pulse-gold 1.4s infinite;
     }
     .btn-record.recording .rec-dot { background: var(--pink); border-radius: 3px; }
+
+    .rec-wave {
+      display: none;
+      align-items: center;
+      justify-content: center;
+      gap: 3px;
+      height: 18px;
+      flex: none;
+    }
+    .btn-record.recording .rec-wave { display: flex; }
+
+    .rec-wave span {
+      width: 3px;
+      border-radius: 2px;
+      background: var(--pink);
+      animation: wave-pulse 0.9s ease-in-out infinite;
+    }
+    .rec-wave span:nth-child(1) { height: 6px; animation-delay: -0.6s; }
+    .rec-wave span:nth-child(2) { height: 14px; animation-delay: -0.3s; }
+    .rec-wave span:nth-child(3) { height: 18px; animation-delay: -0.9s; }
+    .rec-wave span:nth-child(4) { height: 10px; animation-delay: -0.15s; }
+    .rec-wave span:nth-child(5) { height: 15px; animation-delay: -0.45s; }
+
+    @keyframes wave-pulse {
+      0%, 100% { transform: scaleY(0.4); }
+      50% { transform: scaleY(1); }
+    }
 
     @keyframes pulse-gold {
       0% { box-shadow: 0 0 0 0 rgba(201, 148, 0, 0.45); }
@@ -459,7 +514,7 @@
     }
 
     @media (prefers-reduced-motion: reduce) {
-      .btn-record.recording, .task-badge .dot { animation: none; }
+      .btn-record.recording, .task-badge .dot, .sun-mark-wrap::before, .sun-mark circle, .rec-wave span { animation: none; }
     }
   </style>
 </head>
@@ -470,6 +525,7 @@
   <div class="horizon">
     <div class="horizon-inner">
       <div class="brand-block">
+        <div class="sun-mark-wrap">
         <svg class="sun-mark" width="56" height="56" viewBox="0 0 56 56" aria-hidden="true">
           <circle cx="28" cy="30" r="15" fill="#F6C90E"/>
           <g stroke="#F6C90E" stroke-width="2.5" stroke-linecap="round">
@@ -480,6 +536,7 @@
             <line x1="54" y1="30" x2="48" y2="30"/>
           </g>
         </svg>
+        </div>
         <div class="brand-copy">
           <span class="task-badge"><span class="dot"></span> HH Goa 2026 &middot; Task 2</span>
           <h1>Voice&#8209;Enabled Grounded RAG</h1>
@@ -538,6 +595,7 @@
       <div class="controls-container">
         <button id="recordBtn" class="btn-record">
           <span id="recordIcon" class="rec-dot"></span>
+          <span class="rec-wave" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span></span>
           <span id="recordText">Start Voice Recording</span>
         </button>
 

@@ -43,7 +43,12 @@ Light/dark was decided by scene: a judge scans dense multilingual data on a lapt
 
 ## Motion
 
-One authored moment: the record button's pulse (idle→recording), plus a slow blink on the header's live-status dot. No scroll-triggered reveals — this is a single-viewport operate surface, not a scrolling narrative. Respects `prefers-reduced-motion`.
+Two authored moments, tied to the product's own mechanism rather than decorative:
+
+1. **The sun mark breathes** at rest (idle glow, 3.2s cycle) — the header's brand mark feels alive before any interaction, added after competitive review showed a rival submission's single "breathing orb" focal point reading as more premium at a glance. Ours ties the "alive" quality to our own motif (the sun) instead of borrowing a generic orb.
+2. **Real animated waveform bars** flank the record button during active recording (5 bars, staggered `scaleY` pulse) — concrete visual proof the system is listening, in our own pink/gold palette. This directly answers the same rival's side-wave-bars-around-an-orb pattern while staying in-world.
+
+Plus the record button's pulse (idle→recording) and a slow blink on the header's live-status dot. No scroll-triggered reveals — this is a single-viewport operate surface, not a scrolling narrative. Respects `prefers-reduced-motion` (both new animations disable).
 
 ## States verified
 
