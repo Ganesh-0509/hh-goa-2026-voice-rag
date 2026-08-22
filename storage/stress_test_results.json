@@ -1,0 +1,727 @@
+{
+  "sequential": [
+    {
+      "idx": 0,
+      "category": "relevant_hi",
+      "status": 200,
+      "ok": true,
+      "client_elapsed_ms": 822.5,
+      "abstained": false,
+      "server_total_ms": 52.448
+    },
+    {
+      "idx": 1,
+      "category": "relevant_hi",
+      "status": 200,
+      "ok": true,
+      "client_elapsed_ms": 774.0,
+      "abstained": false,
+      "server_total_ms": 143.185
+    },
+    {
+      "idx": 2,
+      "category": "relevant_bn",
+      "status": 200,
+      "ok": true,
+      "client_elapsed_ms": 750.5,
+      "abstained": false,
+      "server_total_ms": 156.367
+    },
+    {
+      "idx": 3,
+      "category": "relevant_ta",
+      "status": 200,
+      "ok": true,
+      "client_elapsed_ms": 763.1,
+      "abstained": false,
+      "server_total_ms": 118.312
+    },
+    {
+      "idx": 4,
+      "category": "relevant_ur",
+      "status": 200,
+      "ok": true,
+      "client_elapsed_ms": 751.4,
+      "abstained": false,
+      "server_total_ms": 87.987
+    },
+    {
+      "idx": 5,
+      "category": "relevant_mr",
+      "status": 200,
+      "ok": true,
+      "client_elapsed_ms": 776.8,
+      "abstained": false,
+      "server_total_ms": 133.575
+    },
+    {
+      "idx": 6,
+      "category": "off_topic",
+      "status": 200,
+      "ok": true,
+      "client_elapsed_ms": 744.7,
+      "abstained": true,
+      "server_total_ms": 65.519
+    },
+    {
+      "idx": 7,
+      "category": "off_topic",
+      "status": 200,
+      "ok": true,
+      "client_elapsed_ms": 710.0,
+      "abstained": true,
+      "server_total_ms": 118.25
+    },
+    {
+      "idx": 8,
+      "category": "off_topic",
+      "status": 200,
+      "ok": true,
+      "client_elapsed_ms": 649.2,
+      "abstained": true,
+      "server_total_ms": 40.655
+    },
+    {
+      "idx": 9,
+      "category": "off_topic",
+      "status": 200,
+      "ok": true,
+      "client_elapsed_ms": 748.5,
+      "abstained": true,
+      "server_total_ms": 111.444
+    },
+    {
+      "idx": 10,
+      "category": "off_topic",
+      "status": 200,
+      "ok": true,
+      "client_elapsed_ms": 721.6,
+      "abstained": true,
+      "server_total_ms": 59.331
+    },
+    {
+      "idx": 11,
+      "category": "unsafe",
+      "status": 200,
+      "ok": true,
+      "client_elapsed_ms": 618.5,
+      "abstained": true,
+      "server_total_ms": 0.11
+    },
+    {
+      "idx": 12,
+      "category": "prompt_injection",
+      "status": 200,
+      "ok": true,
+      "client_elapsed_ms": 617.5,
+      "abstained": true,
+      "server_total_ms": 0.076
+    },
+    {
+      "idx": 13,
+      "category": "unsafe",
+      "status": 200,
+      "ok": true,
+      "client_elapsed_ms": 630.7,
+      "abstained": true,
+      "server_total_ms": 0.061
+    },
+    {
+      "idx": 14,
+      "category": "empty",
+      "status": 200,
+      "ok": true,
+      "client_elapsed_ms": 650.8,
+      "abstained": true,
+      "server_total_ms": 0.031
+    },
+    {
+      "idx": 15,
+      "category": "tiny",
+      "status": 200,
+      "ok": true,
+      "client_elapsed_ms": 703.9,
+      "abstained": true,
+      "server_total_ms": 38.859
+    },
+    {
+      "idx": 16,
+      "category": "oversized",
+      "status": 200,
+      "ok": true,
+      "client_elapsed_ms": 690.8,
+      "abstained": true,
+      "server_total_ms": 0.035
+    },
+    {
+      "idx": 17,
+      "category": "xss_attempt",
+      "status": 200,
+      "ok": true,
+      "client_elapsed_ms": 769.1,
+      "abstained": true,
+      "server_total_ms": 104.682
+    },
+    {
+      "idx": 18,
+      "category": "sql_injection_attempt",
+      "status": 200,
+      "ok": true,
+      "client_elapsed_ms": 788.7,
+      "abstained": true,
+      "server_total_ms": 143.745
+    },
+    {
+      "idx": 19,
+      "category": "whitespace_only",
+      "status": 200,
+      "ok": true,
+      "client_elapsed_ms": 680.7,
+      "abstained": true,
+      "server_total_ms": 0.036
+    }
+  ],
+  "burst": [
+    {
+      "idx": 19,
+      "category": "whitespace_only",
+      "status": 200,
+      "ok": true,
+      "client_elapsed_ms": 1401.7,
+      "abstained": true,
+      "server_total_ms": 0.034
+    },
+    {
+      "idx": 11,
+      "category": "unsafe",
+      "status": 200,
+      "ok": true,
+      "client_elapsed_ms": 1429.8,
+      "abstained": true,
+      "server_total_ms": 0.047
+    },
+    {
+      "idx": 13,
+      "category": "unsafe",
+      "status": 200,
+      "ok": true,
+      "client_elapsed_ms": 1462.9,
+      "abstained": true,
+      "server_total_ms": 0.063
+    },
+    {
+      "idx": 14,
+      "category": "empty",
+      "status": 200,
+      "ok": true,
+      "client_elapsed_ms": 1531.0,
+      "abstained": true,
+      "server_total_ms": 0.022
+    },
+    {
+      "idx": 1,
+      "category": "relevant_hi",
+      "status": 200,
+      "ok": true,
+      "client_elapsed_ms": 1560.7,
+      "abstained": false,
+      "server_total_ms": 129.637
+    },
+    {
+      "idx": 16,
+      "category": "oversized",
+      "status": 200,
+      "ok": true,
+      "client_elapsed_ms": 1658.1,
+      "abstained": true,
+      "server_total_ms": 0.074
+    },
+    {
+      "idx": 10,
+      "category": "off_topic",
+      "status": 200,
+      "ok": true,
+      "client_elapsed_ms": 1741.5,
+      "abstained": true,
+      "server_total_ms": 303.257
+    },
+    {
+      "idx": 12,
+      "category": "prompt_injection",
+      "status": 200,
+      "ok": true,
+      "client_elapsed_ms": 1829.2,
+      "abstained": true,
+      "server_total_ms": 0.07
+    },
+    {
+      "idx": 9,
+      "category": "off_topic",
+      "status": 200,
+      "ok": true,
+      "client_elapsed_ms": 2017.7,
+      "abstained": true,
+      "server_total_ms": 497.651
+    },
+    {
+      "idx": 7,
+      "category": "off_topic",
+      "status": 200,
+      "ok": true,
+      "client_elapsed_ms": 2528.0,
+      "abstained": true,
+      "server_total_ms": 895.181
+    },
+    {
+      "idx": 15,
+      "category": "tiny",
+      "status": 200,
+      "ok": true,
+      "client_elapsed_ms": 2642.4,
+      "abstained": true,
+      "server_total_ms": 978.818
+    },
+    {
+      "idx": 8,
+      "category": "off_topic",
+      "status": 200,
+      "ok": true,
+      "client_elapsed_ms": 2726.7,
+      "abstained": true,
+      "server_total_ms": 1195.172
+    },
+    {
+      "idx": 6,
+      "category": "off_topic",
+      "status": 200,
+      "ok": true,
+      "client_elapsed_ms": 2823.9,
+      "abstained": true,
+      "server_total_ms": 1189.299
+    },
+    {
+      "idx": 18,
+      "category": "sql_injection_attempt",
+      "status": 200,
+      "ok": true,
+      "client_elapsed_ms": 2932.2,
+      "abstained": true,
+      "server_total_ms": 1296.344
+    },
+    {
+      "idx": 4,
+      "category": "relevant_ur",
+      "status": 200,
+      "ok": true,
+      "client_elapsed_ms": 3021.0,
+      "abstained": false,
+      "server_total_ms": 1325.097
+    },
+    {
+      "idx": 0,
+      "category": "relevant_hi",
+      "status": 200,
+      "ok": true,
+      "client_elapsed_ms": 3060.8,
+      "abstained": false,
+      "server_total_ms": 1501.62
+    },
+    {
+      "idx": 2,
+      "category": "relevant_bn",
+      "status": 200,
+      "ok": true,
+      "client_elapsed_ms": 3061.3,
+      "abstained": false,
+      "server_total_ms": 1517.416
+    },
+    {
+      "idx": 17,
+      "category": "xss_attempt",
+      "status": 200,
+      "ok": true,
+      "client_elapsed_ms": 3040.9,
+      "abstained": true,
+      "server_total_ms": 1409.311
+    },
+    {
+      "idx": 5,
+      "category": "relevant_mr",
+      "status": 200,
+      "ok": true,
+      "client_elapsed_ms": 3061.0,
+      "abstained": false,
+      "server_total_ms": 1415.893
+    },
+    {
+      "idx": 3,
+      "category": "relevant_ta",
+      "status": 200,
+      "ok": true,
+      "client_elapsed_ms": 3131.2,
+      "abstained": false,
+      "server_total_ms": 1494.255
+    },
+    {
+      "idx": 24,
+      "category": "relevant_ur",
+      "status": 200,
+      "ok": true,
+      "client_elapsed_ms": 1876.4,
+      "abstained": false,
+      "server_total_ms": 899.04
+    },
+    {
+      "idx": 21,
+      "category": "relevant_hi",
+      "status": 200,
+      "ok": true,
+      "client_elapsed_ms": 2015.1,
+      "abstained": false,
+      "server_total_ms": 1188.974
+    },
+    {
+      "idx": 31,
+      "category": "unsafe",
+      "status": 200,
+      "ok": true,
+      "client_elapsed_ms": 797.9,
+      "abstained": true,
+      "server_total_ms": 0.055
+    },
+    {
+      "idx": 26,
+      "category": "off_topic",
+      "status": 200,
+      "ok": true,
+      "client_elapsed_ms": 1810.0,
+      "abstained": true,
+      "server_total_ms": 928.92
+    },
+    {
+      "idx": 20,
+      "category": "relevant_hi",
+      "status": 200,
+      "ok": true,
+      "client_elapsed_ms": 2224.6,
+      "abstained": false,
+      "server_total_ms": 1338.489
+    },
+    {
+      "idx": 28,
+      "category": "off_topic",
+      "status": 200,
+      "ok": true,
+      "client_elapsed_ms": 1619.7,
+      "abstained": true,
+      "server_total_ms": 905.817
+    },
+    {
+      "idx": 32,
+      "category": "prompt_injection",
+      "status": 200,
+      "ok": true,
+      "client_elapsed_ms": 891.3,
+      "abstained": true,
+      "server_total_ms": 0.099
+    },
+    {
+      "idx": 23,
+      "category": "relevant_ta",
+      "status": 200,
+      "ok": true,
+      "client_elapsed_ms": 2209.8,
+      "abstained": false,
+      "server_total_ms": 1296.141
+    },
+    {
+      "idx": 27,
+      "category": "off_topic",
+      "status": 200,
+      "ok": true,
+      "client_elapsed_ms": 2000.0,
+      "abstained": true,
+      "server_total_ms": 1096.175
+    },
+    {
+      "idx": 25,
+      "category": "relevant_mr",
+      "status": 200,
+      "ok": true,
+      "client_elapsed_ms": 2170.4,
+      "abstained": false,
+      "server_total_ms": 1300.477
+    },
+    {
+      "idx": 22,
+      "category": "relevant_bn",
+      "status": 200,
+      "ok": true,
+      "client_elapsed_ms": 2364.6,
+      "abstained": false,
+      "server_total_ms": 1313.322
+    },
+    {
+      "idx": 33,
+      "category": "unsafe",
+      "status": 200,
+      "ok": true,
+      "client_elapsed_ms": 974.5,
+      "abstained": true,
+      "server_total_ms": 0.068
+    },
+    {
+      "idx": 30,
+      "category": "off_topic",
+      "status": 200,
+      "ok": true,
+      "client_elapsed_ms": 1295.3,
+      "abstained": true,
+      "server_total_ms": 507.437
+    },
+    {
+      "idx": 29,
+      "category": "off_topic",
+      "status": 200,
+      "ok": true,
+      "client_elapsed_ms": 1421.1,
+      "abstained": true,
+      "server_total_ms": 704.538
+    },
+    {
+      "idx": 34,
+      "category": "empty",
+      "status": 200,
+      "ok": true,
+      "client_elapsed_ms": 1120.0,
+      "abstained": true,
+      "server_total_ms": 0.03
+    },
+    {
+      "idx": 36,
+      "category": "oversized",
+      "status": 200,
+      "ok": true,
+      "client_elapsed_ms": 1247.3,
+      "abstained": true,
+      "server_total_ms": 0.067
+    },
+    {
+      "idx": 38,
+      "category": "sql_injection_attempt",
+      "status": 200,
+      "ok": true,
+      "client_elapsed_ms": 1282.3,
+      "abstained": true,
+      "server_total_ms": 88.663
+    },
+    {
+      "idx": 37,
+      "category": "xss_attempt",
+      "status": 200,
+      "ok": true,
+      "client_elapsed_ms": 1306.8,
+      "abstained": true,
+      "server_total_ms": 75.114
+    },
+    {
+      "idx": 35,
+      "category": "tiny",
+      "status": 200,
+      "ok": true,
+      "client_elapsed_ms": 1404.9,
+      "abstained": true,
+      "server_total_ms": 133.858
+    },
+    {
+      "idx": 39,
+      "category": "whitespace_only",
+      "status": 200,
+      "ok": true,
+      "client_elapsed_ms": 1403.8,
+      "abstained": true,
+      "server_total_ms": 0.032
+    },
+    {
+      "idx": 40,
+      "category": "relevant_hi",
+      "status": 200,
+      "ok": true,
+      "client_elapsed_ms": 1993.8,
+      "abstained": false,
+      "server_total_ms": 42.674
+    },
+    {
+      "idx": 41,
+      "category": "relevant_hi",
+      "status": 200,
+      "ok": true,
+      "client_elapsed_ms": 2185.7,
+      "abstained": false,
+      "server_total_ms": 193.824
+    },
+    {
+      "idx": 42,
+      "category": "relevant_bn",
+      "status": 200,
+      "ok": true,
+      "client_elapsed_ms": 2215.8,
+      "abstained": false,
+      "server_total_ms": 209.333
+    },
+    {
+      "idx": 43,
+      "category": "relevant_ta",
+      "status": 200,
+      "ok": true,
+      "client_elapsed_ms": 2293.7,
+      "abstained": false,
+      "server_total_ms": 223.169
+    },
+    {
+      "idx": 45,
+      "category": "relevant_mr",
+      "status": 200,
+      "ok": true,
+      "client_elapsed_ms": 2391.3,
+      "abstained": false,
+      "server_total_ms": 313.094
+    },
+    {
+      "idx": 53,
+      "category": "unsafe",
+      "status": 200,
+      "ok": true,
+      "client_elapsed_ms": 2158.1,
+      "abstained": true,
+      "server_total_ms": 0.059
+    },
+    {
+      "idx": 44,
+      "category": "relevant_ur",
+      "status": 200,
+      "ok": true,
+      "client_elapsed_ms": 2504.0,
+      "abstained": false,
+      "server_total_ms": 330.176
+    },
+    {
+      "idx": 47,
+      "category": "off_topic",
+      "status": 200,
+      "ok": true,
+      "client_elapsed_ms": 2401.6,
+      "abstained": true,
+      "server_total_ms": 320.347
+    },
+    {
+      "idx": 50,
+      "category": "off_topic",
+      "status": 200,
+      "ok": true,
+      "client_elapsed_ms": 2387.0,
+      "abstained": true,
+      "server_total_ms": 309.018
+    },
+    {
+      "idx": 52,
+      "category": "prompt_injection",
+      "status": 200,
+      "ok": true,
+      "client_elapsed_ms": 2373.8,
+      "abstained": true,
+      "server_total_ms": 0.059
+    },
+    {
+      "idx": 51,
+      "category": "unsafe",
+      "status": 200,
+      "ok": true,
+      "client_elapsed_ms": 2399.5,
+      "abstained": true,
+      "server_total_ms": 0.027
+    },
+    {
+      "idx": 48,
+      "category": "off_topic",
+      "status": 200,
+      "ok": true,
+      "client_elapsed_ms": 2495.3,
+      "abstained": true,
+      "server_total_ms": 314.491
+    },
+    {
+      "idx": 54,
+      "category": "empty",
+      "status": 200,
+      "ok": true,
+      "client_elapsed_ms": 2274.2,
+      "abstained": true,
+      "server_total_ms": 0.024
+    },
+    {
+      "idx": 56,
+      "category": "oversized",
+      "status": 200,
+      "ok": true,
+      "client_elapsed_ms": 2083.8,
+      "abstained": true,
+      "server_total_ms": 0.176
+    },
+    {
+      "idx": 59,
+      "category": "whitespace_only",
+      "status": 200,
+      "ok": true,
+      "client_elapsed_ms": 1902.9,
+      "abstained": true,
+      "server_total_ms": 0.018
+    },
+    {
+      "idx": 46,
+      "category": "off_topic",
+      "status": 200,
+      "ok": true,
+      "client_elapsed_ms": 2803.7,
+      "abstained": true,
+      "server_total_ms": 402.149
+    },
+    {
+      "idx": 55,
+      "category": "tiny",
+      "status": 200,
+      "ok": true,
+      "client_elapsed_ms": 2343.7,
+      "abstained": true,
+      "server_total_ms": 328.483
+    },
+    {
+      "idx": 49,
+      "category": "off_topic",
+      "status": 200,
+      "ok": true,
+      "client_elapsed_ms": 2817.9,
+      "abstained": true,
+      "server_total_ms": 335.895
+    },
+    {
+      "idx": 58,
+      "category": "sql_injection_attempt",
+      "status": 200,
+      "ok": true,
+      "client_elapsed_ms": 2274.9,
+      "abstained": true,
+      "server_total_ms": 382.228
+    },
+    {
+      "idx": 57,
+      "category": "xss_attempt",
+      "status": 200,
+      "ok": true,
+      "client_elapsed_ms": 2375.5,
+      "abstained": true,
+      "server_total_ms": 318.363
+    }
+  ],
+  "burst_wall_s": 6.760491371154785
+}
