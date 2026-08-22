@@ -15,7 +15,7 @@ COPY requirements.txt .
 # means the later requirements.txt install finds torch already satisfied and
 # never pulls the ~7GB of unused CUDA packages, shrinking build time and
 # image size substantially.
-RUN pip install --no-cache-dir torch --index-url https://download.pytorch.org/whl/cpu
+RUN pip install --no-cache-dir torch --extra-index-url https://download.pytorch.org/whl/cpu
 RUN pip install --no-cache-dir -r requirements.txt
 
 # Bake the embedding model into the image at build time. Downloading it from
