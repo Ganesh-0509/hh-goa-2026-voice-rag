@@ -31,16 +31,31 @@ python scripts/benchmark.py --num-queries 30
 
 ## 4. Empirical Stage-Wise Latency Results
 
-Measured across 30 benchmark queries using `scripts/benchmark.py`, against the **real index**: 4,751 chunks from 400 rows of `ai4bharat/MSMARCO-XI` (Hindi, validation split). The query set mixes 15 real queries pulled verbatim from the indexed corpus with 15 off-topic/unsafe/prompt-injection queries, so both the "answer" and "abstain" paths are exercised (unlike an earlier run where every query happened to be off-topic against the real corpus and only measured the abstain path).
+Measured across 30 benchmark queries using `scripts/benchmark.py`, against the **real index**: 5,573 chunks across 5 languages (Hindi, Bengali, Tamil, Urdu, Marathi — 100 rows/language, `ai4bharat/MSMARCO-XI` validation split). The query set mixes 15 real queries (3 per language) pulled verbatim from the indexed corpus with 15 off-topic/unsafe/prompt-injection queries, so both the "answer" and "abstain" paths are exercised.
 
 | Stage Name | P50 (ms) | P70 (ms) | P100 (ms) | Mean (ms) | Status |
 | :--- | :--- | :--- | :--- | :--- | :--- |
-| `input_guard_ms` | 0.03 ms | 0.03 ms | 0.04 ms | 0.03 ms | ✅ PASS |
-| `retrieval_ms` (Qdrant + SQLite FTS + RRF) | 37.13 ms | 49.47 ms | 108.09 ms | 43.88 ms | ✅ PASS |
-| `retrieval_guard_ms` | 0.00 ms | 0.00 ms | 0.01 ms | 0.00 ms | ✅ PASS |
-| `generation_ms` (Extractive Grounded) | 0.47 ms | 0.80 ms | 1.77 ms | 0.82 ms | ✅ PASS |
-| `grounding_ms` | 0.07 ms | 0.08 ms | 0.28 ms | 0.09 ms | ✅ PASS |
-| **Post-STT Total RAG Latency** | **36.65 ms** | **46.75 ms** | **108.8 ms** | **38.55 ms** | **✅ PASSED (< 200 ms)** |
+| `input_guard_ms` | 0.05 ms | 0.06 ms | 0.07 ms | 0.05 ms | ✅ PASS |
+| `retrieval_ms` (Qdrant + SQLite FTS + RRF) | 115.79 ms | 122.72 ms | 173.25 ms | 118.23 ms | ✅ PASS |
+| `retrieval_guard_ms` | 0.01 ms | 0.01 ms | 0.01 ms | 0.01 ms | ✅ PASS |
+| `generation_ms` (Extractive Grounded) | 0.92 ms | 0.98 ms | 1.69 ms | 0.94 ms | ✅ PASS |
+| `grounding_ms` | 0.13 ms | 0.22 ms | 0.27 ms | 0.17 ms | ✅ PASS |
+| **Post-STT Total RAG Latency** | **114.29 ms** | **122.69 ms** | **174.54 ms** | **103.12 ms** | **✅ PASSED (< 200 ms)** |
+
+### 4.1 The corpus-size vs. local-mode-latency trade-off
+
+Indexing all 5 languages at 500 rows each (27,955 chunks) pushed retrieval latency to
+P50 268ms / P100 842ms — over target. Cause: Qdrant's embedded/local mode (used here
+since no Qdrant server is running) performs **exact brute-force search**, not HNSW,
+and explicitly warns it isn't recommended past ~20,000 points. The corpus was pruned
+back to 100 rows/language (5,573 chunks) to restore the target with real margin.
+
+This is a local-mode-specific ceiling, not a fundamental limit of the architecture:
+`app/retriever.py` already configures `hnsw_ef=32` for HNSW search, it's just inert
+in local mode (a `UserWarning` confirms this: "Local mode performs exact
+(brute-force) search, so `search_params` has no effect"). Running the bundled
+`docker-compose.yml` Qdrant server would restore real HNSW indexing and remove this
+ceiling, letting the corpus grow far larger without the latency cost.
 
 Retrieval latency roughly doubled versus the earlier 20-chunk placeholder corpus (~19ms → ~37ms P50), as expected with a ~240x larger index — still comfortably under the 200ms target with over 4x headroom even at P100. Indexing more languages/rows (see README §4 Step 2) will grow the corpus further and should be re-benchmarked before final submission.
 

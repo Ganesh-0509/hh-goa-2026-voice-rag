@@ -333,39 +333,80 @@ Created a public GitHub repository and pushed:
 
 ### 4.11 Growing the corpus beyond one language
 
-With bandwidth in this environment now much better, used the `--append` flow
-from §4.6 to add more languages on top of the validated Hindi index without
-wiping it:
+With bandwidth in this environment now much better (a later run's one-time
+materialization took ~70-95 seconds instead of ~8 minutes), used the `--append`
+flow from §4.6 to add every remaining default language on top of the validated
+Hindi index without wiping it:
 
 - Hindi: 400 rows → 4,751 chunks (first run, §4.6)
-- Bengali: 500 rows → 5,493 chunks (appended cleanly, collection preserved)
-- *(further languages — Tamil, Urdu, Marathi — in progress; check this file's
-  git history or `storage/benchmark_results.json` for the latest count)*
+- Bengali: 500 rows → 5,493 chunks
+- Tamil: 500 rows → 5,668 chunks
+- Urdu: 500 rows → 6,441 chunks
+- Marathi: 500 rows → 5,602 chunks
+
+Total: **27,955 chunks across 5 languages.**
+
+### 4.12 A second latency problem, caused by success
+
+Re-running the benchmark against this much bigger corpus blew the 200ms
+target: P50 268ms, P100 842ms. The cause was flagged by Qdrant itself, in a
+warning that had been scrolling past unnoticed during indexing: *"Local mode is
+not recommended for collections with more than 20,000 points... Consider using
+Qdrant in Docker or Qdrant Cloud."* Local/embedded Qdrant (used throughout,
+since no server was running) does **exact brute-force search, not HNSW** —
+`app/retriever.py` already configures `hnsw_ef=32` for HNSW search, but a
+separate `UserWarning` confirms it's inert in local mode ("Local mode performs
+exact (brute-force) search, so `search_params` has no effect"). A linear scan
+over 27,955 vectors per query is a fundamentally different cost curve than an
+HNSW graph traversal, and it showed.
+
+Checked whether a real Qdrant server could be spun up instead (`docker-compose.yml`
+already provisions one) — the Docker CLI was present but its daemon wasn't
+running, and starting Docker Desktop isn't something scriptable from here. So
+the corpus was pruned back down instead: using each chunk's `row_index` payload
+field (present in Qdrant, joined against SQLite by the shared `chunk_id`), kept
+only the first 100 query rows per language and deleted the rest from both
+stores — going from 27,955 chunks back to **5,573**, without needing to
+re-download or re-embed anything.
+
+Re-benchmarked: P50 114.29ms, P70 122.69ms, P100 174.54ms — back under target,
+though with less margin at P100 than the single-language version had. This is a
+**local-mode-specific ceiling, not an architectural one**: running the bundled
+Qdrant Docker container instead of local/embedded mode would restore real HNSW
+indexing and remove this trade-off entirely, letting the corpus grow much larger
+without a latency cost. Worth doing before a real deployment, if a Qdrant
+server is available wherever this gets deployed.
+
+Final correctness re-check on the pruned, 5-language corpus: still **29/30
+(96.7%)**, with all 5 languages represented in the "should answer" set and all
+correctly grounded.
 
 ---
 
 ## 5. Where things stand
 
-- **Real data**: multi-language chunks from `ai4bharat/MSMARCO-XI` (validation
-  split), growing as more languages get appended.
+- **Real data**: 5,573 chunks across 5 languages (Hindi, Bengali, Tamil, Urdu,
+  Marathi — 100 rows/language) from `ai4bharat/MSMARCO-XI`'s validation split.
 - **Chunking**: 6 real strategies exercised on real data — `atomic_short_passage`,
   `qa_fused`, `sentence_group_140w`, `micro_80w_20o`, `standard_180w_40o`,
   `macro_420w_80o` (see `CHUNKING.md` for the full spec).
 - **Retrieval**: hybrid dense (Qdrant, e5-small embeddings) + lexical (SQLite
   FTS5, BM25) with Reciprocal Rank Fusion and a parent-doc/strategy diversity
   filter.
-- **Latency**: P50 36.65ms / P70 46.75ms / P100 108.8ms for the full post-STT
-  path (measured on the 4,751-chunk single-language index; will shift somewhat
-  as more languages are added — re-run `scripts/benchmark.py` after each
-  indexing pass). Comfortably under the 200ms target with wide margin even at
-  P100. Real Sarvam STT round trip measured at ~1,226ms separately, as the task
-  brief itself anticipates cloud STT will exceed the 200ms figure.
-- **Correctness**: 29/30 (96.7%) on a mixed real-query / off-topic benchmark.
+- **Latency**: P50 114.29ms / P70 122.69ms / P100 174.54ms for the full
+  post-STT path — under the 200ms target, though with tighter margin than a
+  smaller corpus would have (see §4.12 for the local-mode-vs-HNSW trade-off
+  behind that number). Real Sarvam STT round trip measured at ~1,226ms
+  separately, as the task brief itself anticipates cloud STT will exceed the
+  200ms figure.
+- **Correctness**: 29/30 (96.7%) on a mixed real-query (all 5 languages) /
+  off-topic benchmark.
 - **Guardrails**: input-level (unsafe content, prompt injection), retrieval-level
   (margin-based off-topic detection, corpus-size-independent), and
   generation-level (grounding/hallucination check requiring ≥40% token support
   from retrieved context).
 - **Repo**: public on GitHub, `.env` and local data stores correctly excluded.
+  https://github.com/Ganesh-0509/hh-goa-2026-voice-rag
 
 ## 6. How to reproduce / extend this
 
@@ -374,8 +415,11 @@ wiping it:
 pip install -r requirements.txt
 cp .env.example .env   # then fill in SARVAM_API_KEY
 
-# Index more data (validation split; each language pays a one-time read cost,
-# see §4.6 — use --append to add a language without wiping existing ones)
+# Index more data (validation split; each new language's first read pays a
+# one-time cost, see §4.6 — use --append to add a language without wiping
+# existing ones). If you have a real Qdrant server running (recommended once
+# you go past ~20K chunks, see §4.12), it'll be used automatically instead of
+# local/embedded mode.
 export HF_TOKEN=<your huggingface token>
 python scripts/build_index.py --languages tam --max-rows 500 --append
 
@@ -390,10 +434,10 @@ uvicorn app.main:app --reload
 
 ## 7. What's still worth doing before final submission
 
-- Finish indexing the remaining target languages (Tamil, Urdu, Marathi) so the
-  demo isn't Hindi/Bengali-only.
-- Re-run `scripts/benchmark.py` after the corpus grows and refresh the numbers
-  in `README.md` / `LATENCY.md` one more time.
+- If deploying somewhere with Docker available, start the real Qdrant server
+  (`docker compose up -d`) instead of relying on local/embedded mode — this
+  removes the corpus-size-vs-latency trade-off from §4.12 and lets the corpus
+  grow well past 100 rows/language without a latency penalty.
 - Record real human speech (not just TTS) through the web UI as a final sanity
   check before the demo video.
 - Record and post the two required videos (team/process, ≤90s; demo, end-to-end)

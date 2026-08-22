@@ -2,281 +2,279 @@
   "num_queries": 30,
   "metrics": {
     "input_guard_ms": {
-      "P50": 0.03,
-      "P70": 0.03,
-      "P100": 0.04,
-      "mean": 0.03
+      "P50": 0.05,
+      "P70": 0.06,
+      "P100": 0.07,
+      "mean": 0.05
     },
     "retrieval_ms": {
-      "P50": 37.13,
-      "P70": 49.47,
-      "P100": 108.09,
-      "mean": 43.88
+      "P50": 115.79,
+      "P70": 122.72,
+      "P100": 173.25,
+      "mean": 118.23
     },
     "retrieval_guard_ms": {
-      "P50": 0.0,
-      "P70": 0.0,
+      "P50": 0.01,
+      "P70": 0.01,
       "P100": 0.01,
-      "mean": 0.0
+      "mean": 0.01
     },
     "generation_ms": {
-      "P50": 0.47,
-      "P70": 0.8,
-      "P100": 1.77,
-      "mean": 0.82
+      "P50": 0.92,
+      "P70": 0.98,
+      "P100": 1.69,
+      "mean": 0.94
     },
     "grounding_ms": {
-      "P50": 0.07,
-      "P70": 0.08,
-      "P100": 0.28,
-      "mean": 0.09
+      "P50": 0.13,
+      "P70": 0.22,
+      "P100": 0.27,
+      "mean": 0.17
     },
     "post_stt_total_ms": {
-      "P50": 36.65,
-      "P70": 46.75,
-      "P100": 108.8,
-      "mean": 38.55
+      "P50": 114.29,
+      "P70": 122.69,
+      "P100": 174.54,
+      "mean": 103.12
     }
   },
   "details": [
     {
       "id": "q1",
       "query": "\u0915\u0949\u0930\u094d\u092a\u094b\u0930\u0947\u0936\u0928 \u0915\u094d\u092f\u093e \u0939\u0948?",
-      "category": "relevant",
+      "category": "relevant_hi",
       "abstained": false,
       "grounded": true,
       "timings": {
-        "input_guard_ms": 0.024,
-        "retrieval_ms": 37.174,
-        "retrieval_guard_ms": 0.003,
-        "generation_ms": 0.426,
-        "grounding_ms": 0.054,
-        "post_stt_total_ms": 37.729,
-        "total_ms": 37.729
+        "input_guard_ms": 0.063,
+        "retrieval_ms": 101.513,
+        "retrieval_guard_ms": 0.005,
+        "generation_ms": 0.918,
+        "grounding_ms": 0.093,
+        "post_stt_total_ms": 102.704,
+        "total_ms": 102.704
       }
     },
     {
       "id": "q2",
       "query": "\u0908\u092e\u093e\u0928\u0926\u093e\u0930\u0940 \u092f\u093e \u0938\u091a\u094d\u091a\u093e\u0908 \u0915\u0940 \u092a\u0930\u093f\u092d\u093e\u0937\u093e",
-      "category": "relevant",
+      "category": "relevant_hi",
       "abstained": false,
       "grounded": true,
       "timings": {
-        "input_guard_ms": 0.026,
-        "retrieval_ms": 37.084,
-        "retrieval_guard_ms": 0.003,
-        "generation_ms": 1.708,
-        "grounding_ms": 0.145,
-        "post_stt_total_ms": 39.04,
-        "total_ms": 39.04
+        "input_guard_ms": 0.047,
+        "retrieval_ms": 108.778,
+        "retrieval_guard_ms": 0.005,
+        "generation_ms": 0.54,
+        "grounding_ms": 0.096,
+        "post_stt_total_ms": 109.55,
+        "total_ms": 109.55
       }
     },
     {
       "id": "q3",
       "query": "\u092c\u093e\u091c\u093c \u0915\u093f\u0924\u0928\u0940 \u0924\u0947\u091c\u0940 \u0938\u0947 \u092f\u093e\u0924\u094d\u0930\u093e \u0915\u0930\u0924\u093e \u0939\u0948",
-      "category": "relevant",
+      "category": "relevant_hi",
       "abstained": false,
       "grounded": true,
       "timings": {
-        "input_guard_ms": 0.03,
-        "retrieval_ms": 56.013,
-        "retrieval_guard_ms": 0.003,
-        "generation_ms": 0.468,
-        "grounding_ms": 0.074,
-        "post_stt_total_ms": 56.65,
-        "total_ms": 56.65
+        "input_guard_ms": 0.064,
+        "retrieval_ms": 159.152,
+        "retrieval_guard_ms": 0.006,
+        "generation_ms": 1.688,
+        "grounding_ms": 0.264,
+        "post_stt_total_ms": 161.296,
+        "total_ms": 161.296
       }
     },
     {
       "id": "q4",
-      "query": "\u0915\u094d\u092f\u093e \u0921\u0947\u0932\u094d\u091f\u093e \u092c\u0948\u0902\u0917\u0932\u094b\u0930 \u0915\u0947 \u0932\u093f\u090f \u0909\u0921\u093c\u093e\u0928 \u092d\u0930\u0924\u093e \u0939\u0948?",
-      "category": "relevant",
+      "query": "\u0995\u09b0\u09cd\u09aa\u09cb\u09b0\u09c7\u09b6\u09a8 \u0995\u09c0?",
+      "category": "relevant_bn",
       "abstained": false,
       "grounded": true,
       "timings": {
-        "input_guard_ms": 0.03,
-        "retrieval_ms": 55.72,
-        "retrieval_guard_ms": 0.004,
-        "generation_ms": 1.773,
-        "grounding_ms": 0.283,
-        "post_stt_total_ms": 57.886,
-        "total_ms": 57.886
+        "input_guard_ms": 0.041,
+        "retrieval_ms": 122.338,
+        "retrieval_guard_ms": 0.006,
+        "generation_ms": 0.828,
+        "grounding_ms": 0.124,
+        "post_stt_total_ms": 123.433,
+        "total_ms": 123.433
       }
     },
     {
       "id": "q5",
-      "query": "\u0915\u0948\u0902\u091f\u093e\u0932\u0942\u092a \u0915\u094b \u0915\u093f\u0924\u0928\u0947 \u0938\u092e\u092f \u0924\u0915 \u092a\u0930\u093f\u092a\u0915\u094d\u0935 \u0939\u094b\u0928\u093e \u0939\u0948",
-      "category": "relevant",
+      "query": "\u09ab\u09cd\u09b0\u09cd\u09af\u09be\u0999\u09cd\u0995 \u0997\u09bf\u09ab\u09cb\u09b0\u09cd\u09a1 \u0995\u09a4\u099c\u09a8 \u09ae\u09b9\u09bf\u09b2\u09be\u0995\u09c7 \u09ac\u09bf\u09af\u09bc\u09c7 \u0995\u09b0\u09c7\u099b\u09bf\u09b2\u09c7\u09a8",
+      "category": "relevant_bn",
       "abstained": false,
       "grounded": true,
       "timings": {
-        "input_guard_ms": 0.031,
-        "retrieval_ms": 52.734,
-        "retrieval_guard_ms": 0.003,
-        "generation_ms": 0.5,
-        "grounding_ms": 0.068,
-        "post_stt_total_ms": 53.385,
-        "total_ms": 53.385
+        "input_guard_ms": 0.06,
+        "retrieval_ms": 129.271,
+        "retrieval_guard_ms": 0.006,
+        "generation_ms": 1.113,
+        "grounding_ms": 0.264,
+        "post_stt_total_ms": 130.825,
+        "total_ms": 130.825
       }
     },
     {
       "id": "q6",
-      "query": "\u091c\u0932\u0935\u093e\u092f\u0941 \u092e\u094c\u0938\u092e \u0915\u093e \u0905\u0927\u094d\u092f\u092f\u0928",
-      "category": "relevant",
-      "abstained": true,
-      "grounded": false,
+      "query": "\u098f\u0995\u099f\u09bf \u0988\u0997\u09b2 \u0995\u09a4 \u09a6\u09cd\u09b0\u09c1\u09a4 \u09ad\u09cd\u09b0\u09ae\u09a3 \u0995\u09b0\u09c7\u0964",
+      "category": "relevant_bn",
+      "abstained": false,
+      "grounded": true,
       "timings": {
-        "input_guard_ms": 0.025,
-        "retrieval_ms": 38.126,
-        "retrieval_guard_ms": 0.003,
-        "generation_ms": 0.858,
-        "grounding_ms": 0.058,
-        "post_stt_total_ms": 39.12,
-        "total_ms": 39.12
+        "input_guard_ms": 0.051,
+        "retrieval_ms": 127.392,
+        "retrieval_guard_ms": 0.009,
+        "generation_ms": 0.832,
+        "grounding_ms": 0.085,
+        "post_stt_total_ms": 128.479,
+        "total_ms": 128.479
       }
     },
     {
       "id": "q7",
-      "query": "\u0938\u092e\u093e\u091c\u0936\u093e\u0938\u094d\u0924\u094d\u0930 \u0915\u0940 \u092a\u0930\u093f\u092d\u093e\u0937\u093e \u0915\u0940 \u0938\u0902\u0938\u094d\u0915\u0943\u0924\u093f",
-      "category": "relevant",
+      "query": "\u0b92\u0bb0\u0bc1 \u0ba8\u0bbf\u0bb1\u0bc1\u0bb5\u0ba9\u0bae\u0bcd \u0b8e\u0ba9\u0bcd\u0baa\u0ba4\u0bc1 \u0b8e\u0ba9\u0bcd\u0ba9?",
+      "category": "relevant_ta",
       "abstained": false,
       "grounded": true,
       "timings": {
-        "input_guard_ms": 0.026,
-        "retrieval_ms": 36.795,
-        "retrieval_guard_ms": 0.003,
-        "generation_ms": 1.754,
-        "grounding_ms": 0.115,
-        "post_stt_total_ms": 38.745,
-        "total_ms": 38.745
+        "input_guard_ms": 0.071,
+        "retrieval_ms": 121.002,
+        "retrieval_guard_ms": 0.006,
+        "generation_ms": 0.895,
+        "grounding_ms": 0.118,
+        "post_stt_total_ms": 122.181,
+        "total_ms": 122.181
       }
     },
     {
       "id": "q8",
-      "query": "\u0938\u094d\u091f\u093e\u0908 \u0915\u093e\u0930\u0923 \u0939\u094b\u0924\u093e \u0939\u0948",
-      "category": "relevant",
+      "query": "\u0b83\u0baa\u0bbf\u0bb0\u0bbe\u0b99\u0bcd\u0b95\u0bcd \u0b95\u0bbf\u0b83\u0baa\u0bcb\u0bb0\u0bcd\u0b9f\u0bc1 \u0b8e\u0ba4\u0bcd\u0ba4\u0ba9\u0bc8 \u0baa\u0bc6\u0ba3\u0bcd\u0b95\u0bb3\u0bc8 \u0ba4\u0bbf\u0bb0\u0bc1\u0bae\u0ba3\u0bae\u0bcd \u0b9a\u0bc6\u0baf\u0bcd\u0ba4\u0bc1 \u0b95\u0bca\u0ba3\u0bcd\u0b9f\u0bbe\u0bb0\u0bcd",
+      "category": "relevant_ta",
       "abstained": false,
       "grounded": true,
       "timings": {
-        "input_guard_ms": 0.022,
-        "retrieval_ms": 52.103,
-        "retrieval_guard_ms": 0.003,
-        "generation_ms": 0.439,
-        "grounding_ms": 0.055,
-        "post_stt_total_ms": 52.677,
-        "total_ms": 52.677
+        "input_guard_ms": 0.069,
+        "retrieval_ms": 132.407,
+        "retrieval_guard_ms": 0.005,
+        "generation_ms": 0.951,
+        "grounding_ms": 0.19,
+        "post_stt_total_ms": 133.714,
+        "total_ms": 133.714
       }
     },
     {
       "id": "q9",
-      "query": "\u0930\u0947\u0921\u093f\u0902\u0917 \u0915\u093e \u0909\u091a\u094d\u091a\u0924\u092e \u0930\u093f\u0915\u0949\u0930\u094d\u0921 \u0924\u093e\u092a\u092e\u093e\u0928",
-      "category": "relevant",
-      "abstained": false,
+      "query": "\u0bb8\u0bcd\u0b9f\u0baa\u0bcd\u0bb9\u0baa\u0bcd \u0b9f\u0bcb\u0bb2\u0bcd \u0b87\u0bb2\u0bb5\u0b9a \u0b8e\u0ba3\u0bcd",
+      "category": "relevant_ta",
+      "abstained": true,
       "grounded": true,
       "timings": {
-        "input_guard_ms": 0.033,
-        "retrieval_ms": 32.378,
-        "retrieval_guard_ms": 0.003,
-        "generation_ms": 0.441,
-        "grounding_ms": 0.064,
-        "post_stt_total_ms": 32.975,
-        "total_ms": 32.975
+        "input_guard_ms": 0.047,
+        "retrieval_ms": 116.727,
+        "retrieval_guard_ms": 0.006,
+        "post_stt_total_ms": 116.843,
+        "total_ms": 116.843
       }
     },
     {
       "id": "q10",
-      "query": "\u090f\u0915 '\u090f\u0915\u094d\u0938\u0947\u0932 \u0936\u0940\u091f' \u0915\u0948\u0938\u0947 \u092a\u094d\u0930\u093f\u0902\u091f \u0915\u0930\u0947\u0902",
-      "category": "relevant",
+      "query": "\u06a9\u0627\u0631\u067e\u0648\u0631\u06cc\u0634\u0646 \u06a9\u06cc\u0627 \u06c1\u06d2\u061f",
+      "category": "relevant_ur",
       "abstained": false,
       "grounded": true,
       "timings": {
-        "input_guard_ms": 0.026,
-        "retrieval_ms": 60.822,
-        "retrieval_guard_ms": 0.003,
-        "generation_ms": 0.349,
-        "grounding_ms": 0.041,
-        "post_stt_total_ms": 61.278,
-        "total_ms": 61.278
+        "input_guard_ms": 0.052,
+        "retrieval_ms": 114.054,
+        "retrieval_guard_ms": 0.006,
+        "generation_ms": 1.051,
+        "grounding_ms": 0.249,
+        "post_stt_total_ms": 115.527,
+        "total_ms": 115.527
       }
     },
     {
       "id": "q11",
-      "query": "\u092b\u094d\u0930\u0948\u0902\u0915 \u0917\u093f\u092b\u094b\u0930\u094d\u0921 \u0928\u0947 \u0915\u093f\u0924\u0928\u0940 \u092e\u0939\u093f\u0932\u093e\u0913\u0902 \u0938\u0947 \u0936\u093e\u0926\u0940 \u0915\u0940",
-      "category": "relevant",
+      "query": "\u0641\u0631\u06cc\u0646\u06a9 \u06af\u0641\u0648\u0631\u0688 \u0646\u06d2 \u06a9\u062a\u0646\u06cc \u062e\u0648\u0627\u062a\u06cc\u0646 \u0633\u06d2 \u0634\u0627\u062f\u06cc \u06a9\u06cc",
+      "category": "relevant_ur",
       "abstained": false,
       "grounded": true,
       "timings": {
-        "input_guard_ms": 0.023,
-        "retrieval_ms": 62.259,
-        "retrieval_guard_ms": 0.003,
-        "generation_ms": 0.473,
-        "grounding_ms": 0.06,
-        "post_stt_total_ms": 62.858,
-        "total_ms": 62.858
+        "input_guard_ms": 0.054,
+        "retrieval_ms": 117.024,
+        "retrieval_guard_ms": 0.005,
+        "generation_ms": 0.979,
+        "grounding_ms": 0.273,
+        "post_stt_total_ms": 118.43,
+        "total_ms": 118.43
       }
     },
     {
       "id": "q12",
-      "query": "\u0906\u092a\u0915\u094b \u0915\u093f\u0924\u0928\u0947 \u0938\u092e\u092f \u0924\u0915 \u0915\u093e\u0930\u094d\u092c \u091a\u0915\u094d\u0930 \u0932\u0917\u093e\u0928\u093e \u091a\u093e\u0939\u093f\u090f",
-      "category": "relevant",
+      "query": "\u0627\u06cc\u06a9 \u0639\u0642\u0627\u0628 \u06a9\u062a\u0646\u06cc \u062a\u06cc\u0632\u06cc \u0633\u06d2 \u0633\u0641\u0631 \u06a9\u0631\u062a\u0627 \u06c1\u06d2",
+      "category": "relevant_ur",
       "abstained": false,
       "grounded": true,
       "timings": {
-        "input_guard_ms": 0.03,
-        "retrieval_ms": 108.092,
-        "retrieval_guard_ms": 0.003,
-        "generation_ms": 0.551,
-        "grounding_ms": 0.075,
-        "post_stt_total_ms": 108.804,
-        "total_ms": 108.804
+        "input_guard_ms": 0.05,
+        "retrieval_ms": 121.301,
+        "retrieval_guard_ms": 0.005,
+        "generation_ms": 0.802,
+        "grounding_ms": 0.214,
+        "post_stt_total_ms": 122.466,
+        "total_ms": 122.466
       }
     },
     {
       "id": "q13",
-      "query": "\u092e\u0942\u0932\u0917\u093e\u092e\u0940 \u0917\u0930\u094d\u0926\u0928 \u0915\u094b \u092a\u0930\u093f\u092d\u093e\u0937\u093f\u0924 \u0915\u0930\u0947\u0902",
-      "category": "relevant",
+      "query": "\u0915\u0949\u0930\u094d\u092a\u094b\u0930\u0947\u0936\u0928 \u092e\u094d\u0939\u0923\u091c\u0947 \u0915\u093e\u092f?",
+      "category": "relevant_mr",
       "abstained": false,
       "grounded": true,
       "timings": {
-        "input_guard_ms": 0.027,
-        "retrieval_ms": 44.532,
-        "retrieval_guard_ms": 0.003,
-        "generation_ms": 1.734,
-        "grounding_ms": 0.138,
-        "post_stt_total_ms": 46.5,
-        "total_ms": 46.5
+        "input_guard_ms": 0.045,
+        "retrieval_ms": 129.673,
+        "retrieval_guard_ms": 0.006,
+        "generation_ms": 0.914,
+        "grounding_ms": 0.116,
+        "post_stt_total_ms": 130.844,
+        "total_ms": 130.844
       }
     },
     {
       "id": "q14",
-      "query": "\u092e\u0948\u091f \u0932\u0949\u092f\u0930 \u090f\u0915 \u0938\u093e\u0932 \u092e\u0947\u0902 \u0915\u093f\u0924\u0928\u093e \u0915\u092e\u093e\u0924\u093e \u0939\u0948",
-      "category": "relevant",
+      "query": "\u092b\u094d\u0930\u0901\u0915 \u0917\u093f\u092b\u0930\u094d\u0921\u0928\u0947 \u0915\u093f\u0924\u0940 \u0938\u094d\u0924\u094d\u0930\u093f\u092f\u093e\u0902\u0936\u0940 \u0932\u0917\u094d\u0928 \u0915\u0947\u0932\u0947",
+      "category": "relevant_mr",
       "abstained": false,
       "grounded": true,
       "timings": {
-        "input_guard_ms": 0.028,
-        "retrieval_ms": 46.828,
-        "retrieval_guard_ms": 0.003,
-        "generation_ms": 0.365,
-        "grounding_ms": 0.064,
-        "post_stt_total_ms": 47.326,
-        "total_ms": 47.326
+        "input_guard_ms": 0.057,
+        "retrieval_ms": 173.252,
+        "retrieval_guard_ms": 0.006,
+        "generation_ms": 0.98,
+        "grounding_ms": 0.14,
+        "post_stt_total_ms": 174.543,
+        "total_ms": 174.543
       }
     },
     {
       "id": "q15",
-      "query": "\u0938\u094d\u091f\u092c\u0939\u092c \u091f\u094b\u0932 \u092b\u094d\u0930\u0940 \u0928\u0902\u092c\u0930",
-      "category": "relevant",
+      "query": "\u0917\u0930\u0941\u0921 \u0915\u093f\u0924\u0940 \u0935\u0947\u0917\u093e\u0928\u0947 \u092a\u094d\u0930\u0935\u093e\u0938 \u0915\u0930\u0924\u094b",
+      "category": "relevant_mr",
       "abstained": false,
       "grounded": true,
       "timings": {
-        "input_guard_ms": 0.016,
-        "retrieval_ms": 44.859,
-        "retrieval_guard_ms": 0.005,
-        "generation_ms": 0.397,
-        "grounding_ms": 0.078,
-        "post_stt_total_ms": 45.427,
-        "total_ms": 45.427
+        "input_guard_ms": 0.049,
+        "retrieval_ms": 142.025,
+        "retrieval_guard_ms": 0.006,
+        "generation_ms": 0.71,
+        "grounding_ms": 0.1,
+        "post_stt_total_ms": 142.977,
+        "total_ms": 142.977
       }
     },
     {
@@ -286,9 +284,9 @@
       "abstained": true,
       "grounded": true,
       "timings": {
-        "input_guard_ms": 0.009,
-        "post_stt_total_ms": 0.018,
-        "total_ms": 0.018
+        "input_guard_ms": 0.045,
+        "post_stt_total_ms": 0.062,
+        "total_ms": 0.062
       }
     },
     {
@@ -298,9 +296,9 @@
       "abstained": true,
       "grounded": true,
       "timings": {
-        "input_guard_ms": 0.021,
-        "post_stt_total_ms": 0.028,
-        "total_ms": 0.028
+        "input_guard_ms": 0.044,
+        "post_stt_total_ms": 0.058,
+        "total_ms": 0.058
       }
     },
     {
@@ -310,11 +308,11 @@
       "abstained": true,
       "grounded": true,
       "timings": {
-        "input_guard_ms": 0.021,
-        "retrieval_ms": 35.407,
-        "retrieval_guard_ms": 0.003,
-        "post_stt_total_ms": 35.462,
-        "total_ms": 35.462
+        "input_guard_ms": 0.042,
+        "retrieval_ms": 105.542,
+        "retrieval_guard_ms": 0.006,
+        "post_stt_total_ms": 105.649,
+        "total_ms": 105.649
       }
     },
     {
@@ -324,11 +322,11 @@
       "abstained": true,
       "grounded": true,
       "timings": {
-        "input_guard_ms": 0.029,
-        "retrieval_ms": 33.143,
-        "retrieval_guard_ms": 0.003,
-        "post_stt_total_ms": 33.21,
-        "total_ms": 33.21
+        "input_guard_ms": 0.058,
+        "retrieval_ms": 99.689,
+        "retrieval_guard_ms": 0.005,
+        "post_stt_total_ms": 99.811,
+        "total_ms": 99.811
       }
     },
     {
@@ -338,11 +336,11 @@
       "abstained": true,
       "grounded": true,
       "timings": {
-        "input_guard_ms": 0.033,
-        "retrieval_ms": 28.26,
-        "retrieval_guard_ms": 0.003,
-        "post_stt_total_ms": 28.33,
-        "total_ms": 28.33
+        "input_guard_ms": 0.054,
+        "retrieval_ms": 93.958,
+        "retrieval_guard_ms": 0.005,
+        "post_stt_total_ms": 94.08,
+        "total_ms": 94.08
       }
     },
     {
@@ -352,11 +350,11 @@
       "abstained": true,
       "grounded": true,
       "timings": {
-        "input_guard_ms": 0.031,
-        "retrieval_ms": 31.492,
-        "retrieval_guard_ms": 0.004,
-        "post_stt_total_ms": 31.562,
-        "total_ms": 31.562
+        "input_guard_ms": 0.058,
+        "retrieval_ms": 114.848,
+        "retrieval_guard_ms": 0.005,
+        "post_stt_total_ms": 114.974,
+        "total_ms": 114.974
       }
     },
     {
@@ -366,11 +364,11 @@
       "abstained": true,
       "grounded": true,
       "timings": {
-        "input_guard_ms": 0.034,
-        "retrieval_ms": 34.124,
-        "retrieval_guard_ms": 0.004,
-        "post_stt_total_ms": 34.196,
-        "total_ms": 34.196
+        "input_guard_ms": 0.068,
+        "retrieval_ms": 105.167,
+        "retrieval_guard_ms": 0.006,
+        "post_stt_total_ms": 105.335,
+        "total_ms": 105.335
       }
     },
     {
@@ -380,11 +378,11 @@
       "abstained": true,
       "grounded": true,
       "timings": {
-        "input_guard_ms": 0.033,
-        "retrieval_ms": 34.241,
+        "input_guard_ms": 0.063,
+        "retrieval_ms": 104.322,
         "retrieval_guard_ms": 0.005,
-        "post_stt_total_ms": 34.323,
-        "total_ms": 34.323
+        "post_stt_total_ms": 104.453,
+        "total_ms": 104.453
       }
     },
     {
@@ -394,25 +392,25 @@
       "abstained": true,
       "grounded": true,
       "timings": {
-        "input_guard_ms": 0.045,
-        "retrieval_ms": 28.832,
-        "retrieval_guard_ms": 0.003,
-        "post_stt_total_ms": 28.908,
-        "total_ms": 28.908
+        "input_guard_ms": 0.064,
+        "retrieval_ms": 99.954,
+        "retrieval_guard_ms": 0.006,
+        "post_stt_total_ms": 100.084,
+        "total_ms": 100.084
       }
     },
     {
       "id": "q25",
-      "query": "\u0917\u094b\u0935\u093e \u0915\u0940 \u0930\u093e\u091c\u0927\u093e\u0928\u0940 \u0915\u094d\u092f\u093e \u0939\u0948?",
-      "category": "off_topic_hi",
+      "query": "\u0997\u09cb\u09af\u09bc\u09be \u09b0\u09be\u099c\u09cd\u09af\u09c7\u09b0 \u09b0\u09be\u099c\u09a7\u09be\u09a8\u09c0 \u0995\u09c0?",
+      "category": "off_topic_bn",
       "abstained": true,
       "grounded": true,
       "timings": {
-        "input_guard_ms": 0.025,
-        "retrieval_ms": 35.484,
-        "retrieval_guard_ms": 0.003,
-        "post_stt_total_ms": 35.545,
-        "total_ms": 35.545
+        "input_guard_ms": 0.06,
+        "retrieval_ms": 123.097,
+        "retrieval_guard_ms": 0.006,
+        "post_stt_total_ms": 123.226,
+        "total_ms": 123.226
       }
     },
     {
@@ -422,11 +420,11 @@
       "abstained": true,
       "grounded": true,
       "timings": {
-        "input_guard_ms": 0.029,
-        "retrieval_ms": 53.05,
-        "retrieval_guard_ms": 0.003,
-        "post_stt_total_ms": 53.117,
-        "total_ms": 53.117
+        "input_guard_ms": 0.053,
+        "retrieval_ms": 113.473,
+        "retrieval_guard_ms": 0.006,
+        "post_stt_total_ms": 113.598,
+        "total_ms": 113.598
       }
     },
     {
@@ -436,9 +434,9 @@
       "abstained": true,
       "grounded": true,
       "timings": {
-        "input_guard_ms": 0.027,
-        "post_stt_total_ms": 0.035,
-        "total_ms": 0.035
+        "input_guard_ms": 0.055,
+        "post_stt_total_ms": 0.07,
+        "total_ms": 0.07
       }
     },
     {
@@ -448,9 +446,9 @@
       "abstained": true,
       "grounded": true,
       "timings": {
-        "input_guard_ms": 0.011,
-        "post_stt_total_ms": 0.016,
-        "total_ms": 0.016
+        "input_guard_ms": 0.022,
+        "post_stt_total_ms": 0.033,
+        "total_ms": 0.033
       }
     },
     {
@@ -460,11 +458,11 @@
       "abstained": true,
       "grounded": true,
       "timings": {
-        "input_guard_ms": 0.018,
-        "retrieval_ms": 35.521,
-        "retrieval_guard_ms": 0.004,
-        "post_stt_total_ms": 35.574,
-        "total_ms": 35.574
+        "input_guard_ms": 0.034,
+        "retrieval_ms": 94.719,
+        "retrieval_guard_ms": 0.005,
+        "post_stt_total_ms": 94.814,
+        "total_ms": 94.814
       }
     },
     {
@@ -474,11 +472,11 @@
       "abstained": true,
       "grounded": true,
       "timings": {
-        "input_guard_ms": 0.037,
-        "retrieval_ms": 25.78,
-        "retrieval_guard_ms": 0.003,
-        "post_stt_total_ms": 25.852,
-        "total_ms": 25.852
+        "input_guard_ms": 0.065,
+        "retrieval_ms": 103.386,
+        "retrieval_guard_ms": 0.005,
+        "post_stt_total_ms": 103.519,
+        "total_ms": 103.519
       }
     }
   ]

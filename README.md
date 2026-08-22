@@ -164,19 +164,21 @@ python scripts/benchmark.py --num-queries 30
 
 ### Latency Summary (Empirical Benchmark Results — real MSMARCO-XI data)
 
-Measured against the real index: 4,751 chunks from 400 rows of `ai4bharat/MSMARCO-XI` (Hindi, validation split), across 30 benchmark queries (15 real queries pulled from the indexed corpus + 15 off-topic/unsafe/prompt-injection). See `storage/benchmark_queries.json` / `storage/benchmark_results.json`.
+Measured against the real index: **5,573 chunks across 5 languages** (Hindi, Bengali, Tamil, Urdu, Marathi — 100 rows/language, `validation` split), across 30 benchmark queries (15 real queries, 3 per language, pulled verbatim from the indexed corpus + 15 off-topic/unsafe/prompt-injection). See `storage/benchmark_queries.json` / `storage/benchmark_results.json`.
 
 | Stage Name | P50 (ms) | P70 (ms) | P100 (ms) | Target Met |
 | :--- | :--- | :--- | :--- | :--- |
-| **Input Guardrails** | 0.03 ms | 0.03 ms | 0.04 ms | ✅ Yes |
-| **Dense + Lexical Search (Qdrant + SQLite FTS5)** | 37.13 ms | 49.47 ms | 108.09 ms | ✅ Yes |
-| **Retrieval Guard** | 0.00 ms | 0.00 ms | 0.01 ms | ✅ Yes |
-| **Grounded Answer Generator** | 0.47 ms | 0.80 ms | 1.77 ms | ✅ Yes |
-| **Grounding Validator** | 0.07 ms | 0.08 ms | 0.28 ms | ✅ Yes |
-| **Post-STT RAG Path Total** | **36.65 ms** | **46.75 ms** | **108.8 ms** | **✅ Under 200ms Target** |
+| **Input Guardrails** | 0.05 ms | 0.06 ms | 0.07 ms | ✅ Yes |
+| **Dense + Lexical Search (Qdrant + SQLite FTS5)** | 115.79 ms | 122.72 ms | 173.25 ms | ✅ Yes |
+| **Retrieval Guard** | 0.01 ms | 0.01 ms | 0.01 ms | ✅ Yes |
+| **Grounded Answer Generator** | 0.92 ms | 0.98 ms | 1.69 ms | ✅ Yes |
+| **Grounding Validator** | 0.13 ms | 0.22 ms | 0.27 ms | ✅ Yes |
+| **Post-STT RAG Path Total** | **114.29 ms** | **122.69 ms** | **174.54 ms** | **✅ Under 200ms Target** |
 | **Cloud STT (Sarvam)** | ~1226 ms (measured live) | — | — | *(External Cloud API — real network round trip, not an estimate)* |
 
-**Correctness**: of the 30 queries, 29/30 (96.7%) got the correct abstain-vs-answer decision — all 15 off-topic/unsafe/prompt-injection queries correctly refused/abstained, 14/15 real corpus queries got correctly grounded answers, and the 1 miss was a false-negative abstention (safe failure mode — declining to answer rather than hallucinating), not a wrong answer.
+**Correctness**: of the 30 queries, 29/30 (96.7%) got the correct abstain-vs-answer decision across all 5 languages — all 15 off-topic/unsafe/prompt-injection queries correctly refused/abstained, 14/15 real corpus queries got correctly grounded answers, and the 1 miss was a false-negative abstention (safe failure mode — declining to answer rather than hallucinating), not a wrong answer.
+
+**A real constraint worth knowing about**: this index initially grew to 27,955 chunks (500 rows × 5 languages) and blew the 200ms target (P50 268ms, P100 842ms). Cause: Qdrant's **local/embedded mode does exact brute-force search, not HNSW**, and explicitly warns it isn't recommended past ~20,000 points. It was pruned back down to 100 rows/language (5,573 chunks) to restore the latency target — this trade-off (corpus breadth vs. local-mode latency) goes away with a real Qdrant server (Docker/Cloud), which does proper HNSW indexing regardless of corpus size; `docker-compose.yml` is already set up for this. If you deploy with a running Qdrant server, you can safely re-index with far more rows per language without this constraint.
 
 ---
 
