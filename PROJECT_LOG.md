@@ -381,6 +381,66 @@ Final correctness re-check on the pruned, 5-language corpus: still **29/30
 (96.7%)**, with all 5 languages represented in the "should answer" set and all
 correctly grounded.
 
+### 4.13 Getting a live public link
+
+The task requires a "live working link," not just a GitHub repo. Getting there
+took three real attempts, each surfacing a genuine constraint:
+
+**Choosing a host.** The initial choice (Render's free tier) turned out to be
+infeasible before a single deploy attempt: it caps free web services at 512MB
+RAM, and this app — FastAPI + PyTorch + `sentence-transformers` + a local
+Qdrant instance — measured **1.9GB RAM in a local Docker test**. Railway's free
+tier has the identical 512MB cap, so it was ruled out for the same reason.
+Hugging Face Spaces looked promising next (16GB RAM on its free CPU tier,
+and thematically fitting since the dataset itself lives on HF) — but attempting
+to actually create a Docker Space returned `402 Payment Required`: as of mid-2026,
+Docker/Gradio Space hosting requires a PRO subscription ($9/month); only fully
+static (no-backend) Spaces remain free. Fly.io was checked too and has no free
+tier at all anymore (removed in 2024). **Google Cloud Run** ended up being the
+real answer: a genuine perpetual free tier (2M requests, 360K GB-seconds
+memory, 180K vCPU-seconds/month) with true serverless scale-to-zero, so light
+hackathon-judging traffic costs nothing — and `gcloud` was already installed
+and authenticated in this environment. A dedicated GCP project
+(`hh-goa-2026-voicerag`) was created specifically for this, rather than reusing
+an unrelated existing project, with billing linked and Cloud Run/Cloud
+Build/Artifact Registry APIs enabled.
+
+**Shipping the index without committing 214MB to git.** `storage/chunks.sqlite`
+and `storage/qdrant_db/` are git-ignored (correctly — one internal file is
+140MB, over GitHub's 100MB hard limit for a normal push). Rather than have the
+deployed container rebuild the index from Hugging Face on every cold start
+(slow, and dependent on HF network conditions at deploy time), the current
+5,573-chunk index was packaged as a ~75MB compressed tarball and attached to a
+[GitHub Release](https://github.com/Ganesh-0509/hh-goa-2026-voice-rag/releases/tag/prebuilt-index-v1).
+A small `scripts/entrypoint.sh` downloads and extracts it on container start
+if it's not already present, then launches `uvicorn`.
+
+**Deploy attempt 1 — OOM.** First deploy used `--memory 2Gi` (padding over the
+locally-measured 1.9GB). It failed: Cloud Run's own logs showed *"Memory limit
+of 2048 MiB exceeded with 2090 MiB used"* — just over the line. Redeployed with
+`--memory 4Gi`.
+
+**Deploy attempt 2 — startup timeout.** The memory fix revealed a second,
+different problem: the container now had enough RAM, but took too long to
+become ready. Reading the timestamped logs closely showed why: downloading the
+`sentence-transformers` embedding model *from Hugging Face, on every container
+cold start*, took about 100 seconds by itself, on top of ~80 seconds of Python
+import overhead for `torch` and friends — pushing total startup past Cloud
+Run's fixed 4-minute startup probe window. Fixed by baking the model into the
+Docker image at *build* time (`RUN python -c "from sentence_transformers import
+SentenceTransformer; SentenceTransformer('intfloat/multilingual-e5-small')"`)
+instead of downloading it at every runtime start, plus `--cpu-boost` for extra
+startup speed margin.
+
+**Deploy attempt 3 — success.** Verified live over the public internet, not
+just locally: `/health` returns 200, an unsafe query ("How to make a bomb?")
+is correctly refused, a real Hindi query ("कॉर्पोरेशन क्या है?" — "what is a
+corporation?") is correctly answered with grounded content, and the web UI
+loads. Deployed with `--min-instances 0` so it scales to zero (no idle cost)
+under the account `ganeshkumart3095@gmail.com`.
+
+**Live URL: https://hh-goa-voice-rag-686797972138.us-central1.run.app**
+
 ---
 
 ## 5. Where things stand
@@ -407,6 +467,8 @@ correctly grounded.
   from retrieved context).
 - **Repo**: public on GitHub, `.env` and local data stores correctly excluded.
   https://github.com/Ganesh-0509/hh-goa-2026-voice-rag
+- **Live link**: deployed on Google Cloud Run, verified working over the public
+  internet (see §4.13). https://hh-goa-voice-rag-686797972138.us-central1.run.app
 
 ## 6. How to reproduce / extend this
 
@@ -439,7 +501,11 @@ uvicorn app.main:app --reload
   removes the corpus-size-vs-latency trade-off from §4.12 and lets the corpus
   grow well past 100 rows/language without a latency penalty.
 - Record real human speech (not just TTS) through the web UI as a final sanity
-  check before the demo video.
+  check before the demo video — the deployed live link is the right place to
+  do this: https://hh-goa-voice-rag-686797972138.us-central1.run.app
 - Record and post the two required videos (team/process, ≤90s; demo, end-to-end)
   with `#RAGInGoa` on Instagram and X, from every team member individually, per
   the task's promotion requirement.
+- Fill in and submit the hackathon submission form with the GitHub repo link
+  and the live Cloud Run link above. Double-check everything one more time
+  first — no resubmissions are allowed.

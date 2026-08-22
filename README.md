@@ -4,6 +4,8 @@ An end-to-end, ultra-low-latency voice-enabled Retrieval-Augmented Generation (R
 
 The system transcribes spoken input using **Sarvam Speech-to-Text**, retrieves relevant document chunks via hybrid dense (Qdrant) and lexical (SQLite FTS5) search across multi-strategy chunking, and produces grounded answers with verified citations targeting sub-200ms post-transcription latency.
 
+**Live demo**: https://hh-goa-voice-rag-686797972138.us-central1.run.app (deployed on Google Cloud Run; see `PROJECT_LOG.md` §4.13 for the deployment story, including two real deploy failures — an OOM and a cold-start timeout — and how they were fixed.)
+
 ---
 
 ## 1. System Architecture
