@@ -1,0 +1,17 @@
+fastapi
+uvicorn[standard]
+python-multipart
+requests
+datasets
+huggingface_hub
+pyarrow
+sentence-transformers
+qdrant-client
+numpy
+pydantic
+pydantic-settings
+tenacity
+regex
+orjson
+tqdm
+python-dotenv

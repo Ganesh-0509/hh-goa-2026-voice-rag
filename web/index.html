@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Voice RAG | HH Goa 2026</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0b0f19;
+      --card-bg: rgba(21, 29, 46, 0.7);
+      --card-border: rgba(255, 255, 255, 0.08);
+      --primary: #6366f1;
+      --primary-hover: #4f46e5;
+      --accent: #10b981;
+      --accent-warn: #f59e0b;
+      --accent-danger: #ef4444;
+      --text: #f3f4f6;
+      --text-muted: #9ca3af;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--bg);
+      background-image: 
+        radial-gradient(circle at 15% 20%, rgba(99, 102, 241, 0.15) 0%, transparent 40%),
+        radial-gradient(circle at 85% 80%, rgba(16, 185, 129, 0.12) 0%, transparent 40%);
+      color: var(--text);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    header {
+      padding: 2rem 2rem 1rem;
+      max-width: 1200px;
+      margin: 0 auto;
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .logo-group {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .logo-badge {
+      background: linear-gradient(135deg, #6366f1, #10b981);
+      padding: 6px 14px;
+      border-radius: 20px;
+      font-family: 'Outfit', sans-serif;
+      font-weight: 800;
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    h1 {
+      font-family: 'Outfit', sans-serif;
+      font-size: 1.8rem;
+      font-weight: 700;
+      background: linear-gradient(to right, #ffffff, #9ca3af);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .sub-tag {
+      color: var(--text-muted);
+      font-size: 0.9rem;
+    }
+
+    main {
+      max-width: 1200px;
+      margin: 0 auto 3rem;
+      width: 100%;
+      padding: 0 2rem;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+      flex-grow: 1;
+    }
+
+    @media (max-width: 900px) {
+      main { grid-template-columns: 1fr; }
+    }
+
+    .panel {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      backdrop-filter: blur(12px);
+      border-radius: 16px;
+      padding: 1.75rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    }
+
+    .panel-title {
+      font-family: 'Outfit', sans-serif;
+      font-size: 1.2rem;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding-bottom: 0.75rem;
+      border-bottom: 1px solid var(--card-border);
+    }
+
+    .controls-container {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .btn-record {
+      background: linear-gradient(135deg, #ef4444, #dc2626);
+      color: white;
+      border: none;
+      padding: 1rem 1.5rem;
+      border-radius: 12px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      transition: all 0.2s ease;
+      box-shadow: 0 4px 15px rgba(239, 68, 68, 0.3);
+    }
+
+    .btn-record:hover:not(:disabled) {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(239, 68, 68, 0.4);
+    }
+
+    .btn-record.recording {
+      background: linear-gradient(135deg, #f59e0b, #d97706);
+      animation: pulse 1.5s infinite;
+    }
+
+    @keyframes pulse {
+      0% { box-shadow: 0 0 0 0 rgba(245, 158, 11, 0.4); }
+      70% { box-shadow: 0 0 0 15px rgba(245, 158, 11, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(245, 158, 11, 0); }
+    }
+
+    .btn-submit {
+      background: linear-gradient(135deg, var(--primary), var(--primary-hover));
+      color: white;
+      border: none;
+      padding: 0.85rem 1.25rem;
+      border-radius: 10px;
+      font-size: 0.95rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .btn-submit:hover:not(:disabled) {
+      transform: translateY(-1px);
+    }
+
+    .btn-submit:disabled, .btn-record:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+    .text-input-group {
+      display: flex;
+      gap: 10px;
+    }
+
+    input[type="text"] {
+      flex-grow: 1;
+      background: rgba(0,0,0,0.3);
+      border: 1px solid var(--card-border);
+      border-radius: 10px;
+      padding: 0.75rem 1rem;
+      color: var(--text);
+      font-family: inherit;
+      font-size: 0.95rem;
+      outline: none;
+    }
+
+    input[type="text"]:focus {
+      border-color: var(--primary);
+    }
+
+    .status-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 12px;
+      border-radius: 12px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      width: fit-content;
+    }
+
+    .status-ready { background: rgba(156, 163, 175, 0.15); color: #d1d5db; }
+    .status-recording { background: rgba(239, 68, 68, 0.2); color: #fca5a5; }
+    .status-processing { background: rgba(99, 102, 241, 0.2); color: #a5b4fc; }
+    .status-success { background: rgba(16, 185, 129, 0.2); color: #6ee7b7; }
+    .status-abstained { background: rgba(245, 158, 11, 0.2); color: #fde68a; }
+
+    .box-title {
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--text-muted);
+      margin-bottom: 6px;
+    }
+
+    .content-box {
+      background: rgba(0,0,0,0.25);
+      border: 1px solid var(--card-border);
+      border-radius: 10px;
+      padding: 1rem;
+      min-height: 80px;
+      font-size: 0.95rem;
+      line-height: 1.5;
+    }
+
+    .citations-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      max-height: 250px;
+      overflow-y: auto;
+    }
+
+    .citation-card {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid var(--card-border);
+      border-radius: 8px;
+      padding: 0.75rem;
+      font-size: 0.85rem;
+    }
+
+    .citation-header {
+      display: flex;
+      justify-content: space-between;
+      color: var(--text-muted);
+      font-size: 0.75rem;
+      margin-bottom: 4px;
+    }
+
+    .latency-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+    }
+
+    .metric-card {
+      background: rgba(0,0,0,0.3);
+      border: 1px solid var(--card-border);
+      border-radius: 8px;
+      padding: 0.75rem;
+      text-align: center;
+    }
+
+    .metric-val {
+      font-family: 'Outfit', sans-serif;
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: var(--accent);
+      margin-top: 4px;
+    }
+
+    .metric-val.highlight {
+      color: #818cf8;
+    }
+
+    .timing-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.85rem;
+      margin-top: 0.5rem;
+    }
+
+    .timing-table th, .timing-table td {
+      padding: 6px 10px;
+      text-align: left;
+      border-bottom: 1px solid var(--card-border);
+    }
+
+    .timing-table th {
+      color: var(--text-muted);
+      font-weight: 500;
+    }
+
+    footer {
+      text-align: center;
+      padding: 1rem;
+      color: var(--text-muted);
+      font-size: 0.8rem;
+      border-top: 1px solid var(--card-border);
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="logo-group">
+      <div class="logo-badge">HH Goa 2026</div>
+      <div>
+        <h1>Voice-Enabled Grounded RAG</h1>
+        <div class="sub-tag">MSMARCO-XI Multilingual Vector Pipeline</div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- Left Column: Audio & Text Controls -->
+    <div class="panel">
+      <div class="panel-title">
+        🎤 Input Interface
+      </div>
+
+      <div class="controls-container">
+        <button id="recordBtn" class="btn-record">
+          <span id="recordIcon">🔴</span>
+          <span id="recordText">Start Voice Recording</span>
+        </button>
+
+        <div class="text-input-group">
+          <input type="text" id="textInput" placeholder="Or type a question for fast benchmarking..." />
+          <button id="submitTextBtn" class="btn-submit">Ask Text</button>
+        </div>
+      </div>
+
+      <div>
+        <div class="box-title">System Status</div>
+        <div id="statusBadge" class="status-badge status-ready">Ready</div>
+      </div>
+
+      <div>
+        <div class="box-title">Speech Transcript</div>
+        <div id="transcriptBox" class="content-box">Speech transcript will appear here after recording...</div>
+      </div>
+
+      <div>
+        <div class="box-title">Audio Preview</div>
+        <audio id="audioPreview" controls style="width: 100%; margin-top: 4px; display: none;"></audio>
+      </div>
+    </div>
+
+    <!-- Right Column: Grounded Answer & Latency Analytics -->
+    <div class="panel">
+      <div class="panel-title">
+        ⚡ RAG Response & Latency Breakdown
+      </div>
+
+      <div>
+        <div class="box-title">Grounded Answer</div>
+        <div id="answerBox" class="content-box">The system answer will be rendered here with citations...</div>
+      </div>
+
+      <div>
+        <div class="box-title">Citations & Evidence Chunks</div>
+        <div id="citationsBox" class="citations-grid">
+          <div style="color: var(--text-muted); font-size: 0.85rem;">No citations loaded yet.</div>
+        </div>
+      </div>
+
+      <div>
+        <div class="box-title">Stage-wise Latency Metrics (ms)</div>
+        <div class="latency-grid">
+          <div class="metric-card">
+            <div class="box-title">Post-STT RAG</div>
+            <div id="metricPostStt" class="metric-val">0 ms</div>
+          </div>
+          <div class="metric-card">
+            <div class="box-title">Dense Search</div>
+            <div id="metricDense" class="metric-val highlight">0 ms</div>
+          </div>
+          <div class="metric-card">
+            <div class="box-title">Total Latency</div>
+            <div id="metricTotal" class="metric-val" style="color: #f43f5e;">0 ms</div>
+          </div>
+        </div>
+
+        <table class="timing-table">
+          <thead>
+            <tr>
+              <th>Pipeline Stage</th>
+              <th>Execution Time</th>
+            </tr>
+          </thead>
+          <tbody id="timingTableBody">
+            <tr><td colspan="2" style="color: var(--text-muted);">No execution timings available</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    Voice RAG Pipeline | HH Goa 2026 Shortlisting Task 2 | Optimized for Sub-200ms Post-STT RAG Latency
+  </footer>
+
+  <script>
+    let mediaRecorder;
+    let audioChunks = [];
+    let isRecording = false;
+
+    const recordBtn = document.getElementById("recordBtn");
+    const recordIcon = document.getElementById("recordIcon");
+    const recordText = document.getElementById("recordText");
+    const textInput = document.getElementById("textInput");
+    const submitTextBtn = document.getElementById("submitTextBtn");
+    const statusBadge = document.getElementById("statusBadge");
+    const transcriptBox = document.getElementById("transcriptBox");
+    const answerBox = document.getElementById("answerBox");
+    const citationsBox = document.getElementById("citationsBox");
+    const audioPreview = document.getElementById("audioPreview");
+
+    const metricPostStt = document.getElementById("metricPostStt");
+    const metricDense = document.getElementById("metricDense");
+    const metricTotal = document.getElementById("metricTotal");
+    const timingTableBody = document.getElementById("timingTableBody");
+
+    function setStatus(text, cls) {
+      statusBadge.textContent = text;
+      statusBadge.className = "status-badge " + cls;
+    }
+
+    recordBtn.onclick = async () => {
+      if (!isRecording) {
+        audioChunks = [];
+        try {
+          const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+          mediaRecorder = new MediaRecorder(stream);
+          mediaRecorder.ondataavailable = e => audioChunks.push(e.data);
+          
+          mediaRecorder.onstop = async () => {
+            const blob = new Blob(audioChunks, { type: "audio/webm" });
+            audioPreview.src = URL.createObjectURL(blob);
+            audioPreview.style.display = "block";
+            await submitAudio(blob);
+          };
+
+          mediaRecorder.start();
+          isRecording = true;
+          recordBtn.classList.add("recording");
+          recordIcon.textContent = "⏹️";
+          recordText.textContent = "Stop & Process Question";
+          setStatus("Recording Audio...", "status-recording");
+        } catch (err) {
+          alert("Microphone access denied or error: " + err);
+        }
+      } else {
+        mediaRecorder.stop();
+        isRecording = false;
+        recordBtn.classList.remove("recording");
+        recordIcon.textContent = "🔴";
+        recordText.textContent = "Start Voice Recording";
+        setStatus("Processing STT & RAG...", "status-processing");
+      }
+    };
+
+    submitTextBtn.onclick = async () => {
+      const q = textInput.value.trim();
+      if (!q) return;
+      setStatus("Processing RAG Query...", "status-processing");
+      try {
+        const res = await fetch("/api/ask-text", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ query: q })
+        });
+        const data = await res.json();
+        renderResponse(data);
+      } catch (err) {
+        setStatus("Error processing query", "status-recording");
+      }
+    };
+
+    async function submitAudio(blob) {
+      const formData = new FormData();
+      formData.append("file", blob, "question.webm");
+
+      try {
+        const res = await fetch("/api/ask-audio", {
+          method: "POST",
+          body: formData
+        });
+        const data = await res.json();
+        renderResponse(data);
+      } catch (err) {
+        setStatus("Error uploading audio", "status-recording");
+      }
+    }
+
+    function renderResponse(data) {
+      transcriptBox.textContent = data.transcript || "[Empty Transcript]";
+      answerBox.textContent = data.answer || "[No answer]";
+
+      if (data.abstained) {
+        setStatus("Abstained: " + (data.abstain_reason || "Insufficient Context"), "status-abstained");
+      } else {
+        setStatus("Answer Grounded Successfully", "status-success");
+      }
+
+      // Render Citations
+      if (data.citations && data.citations.length > 0) {
+        citationsBox.innerHTML = data.citations.map(c => `
+          <div class="citation-card">
+            <div class="citation-header">
+              <span>Chunk ID: ${c.chunk_id.substring(0, 8)}... | Strategy: ${c.strategy || 'standard'}</span>
+              <span>Score: ${c.score.toFixed(4)}</span>
+            </div>
+            <div>"${c.quote}"</div>
+          </div>
+        `).join("");
+      } else {
+        citationsBox.innerHTML = '<div style="color: var(--text-muted); font-size: 0.85rem;">No citations available.</div>';
+      }
+
+      // Render Metrics
+      const t = data.timings_ms || {};
+      metricPostStt.textContent = (t.post_stt_total_ms || t.total_ms || 0) + " ms";
+      metricDense.textContent = (t.retrieval_ms || 0) + " ms";
+      metricTotal.textContent = (t.total_ms || 0) + " ms";
+
+      // Timing Table
+      timingTableBody.innerHTML = Object.entries(t).map(([stage, ms]) => `
+        <tr>
+          <td>${stage}</td>
+          <td><strong>${ms} ms</strong></td>
+        </tr>
+      `).join("");
+    }
+  </script>
+</body>
+</html>
