@@ -9,6 +9,13 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     && rm -rf /var/lib/apt/lists/*
 
 COPY requirements.txt .
+# sentence-transformers pulls in torch transitively, and PyPI's default torch
+# wheel bundles NVIDIA CUDA libraries even though this app only ever runs
+# CPU inference (Cloud Run has no GPU). Installing the CPU-only wheel first
+# means the later requirements.txt install finds torch already satisfied and
+# never pulls the ~7GB of unused CUDA packages, shrinking build time and
+# image size substantially.
+RUN pip install --no-cache-dir torch --index-url https://download.pytorch.org/whl/cpu
 RUN pip install --no-cache-dir -r requirements.txt
 
 # Bake the embedding model into the image at build time. Downloading it from
